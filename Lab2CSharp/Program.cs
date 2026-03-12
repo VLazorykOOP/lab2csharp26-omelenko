@@ -23,7 +23,8 @@ public class Program
                 Print(Task2().ToString());
                 break;
             case 3:
-                PrintArray(Task3());
+                (int[] snakeElements, int n) result = Task3();
+                PrintSnake(result.Item1, result.Item2);
                 break;
             case 4:
                 PrintTask4Results(Task4());
@@ -40,6 +41,38 @@ public class Program
         else Console.WriteLine(message);
     }
 
+    static void PrintSnake(int[] snakeElements, int n)
+    {
+        Print("Елементи матрицi в стилi змiйки:");
+        int index = 0;
+        int rowCount = 0;
+
+        while (index < snakeElements.Length)
+        {
+            for (int i = 0; i < n && index < snakeElements.Length; i++)
+            {
+                Console.Write(snakeElements[index] + " ");
+                index++;
+            }
+            Console.WriteLine();
+
+            if (index < snakeElements.Length)
+            {
+                if (rowCount % 2 == 0)
+                {
+                    for (int i = 0; i < n - 1; i++) Console.Write("  ");
+                    Console.WriteLine(snakeElements[index]);
+                }
+                else
+                {
+                    Console.WriteLine(snakeElements[index]);
+                }
+
+                index++;
+                rowCount++;
+            }
+        }
+    }
     static void PrintArray(int[] array)
     {
         Print("Результат: " + string.Join(", ", array));
@@ -120,7 +153,7 @@ public class Program
         }
     }
 
-    public static int[] Task3()
+    public static (int[], int) Task3()
     {
         Print("Введiть розмiр матрицi (n x n): ", true);
         int n = Convert.ToInt32(Console.ReadLine());
@@ -153,7 +186,7 @@ public class Program
                 }
             }
         }
-        return snakeElements.ToArray();
+        return (snakeElements.ToArray(), n);
     }
 
     public static (int[] sums, int maxSum) Task4()

@@ -44,7 +44,7 @@ public class ProgramTests
 
         var result = Program.Task3();
 
-        Assert.Equal(new int[] { 1, 2, 4, 3 }, result);
+        Assert.Equal(new int[] { 1, 2, 4, 3 }, result.Item1);
     }
 
     [Fact]
